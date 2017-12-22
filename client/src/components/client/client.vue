@@ -1,12 +1,12 @@
 <template>
   <div class="test">
-    <div v-for="user in users">
+    <div v-for="client in clients">
       <p>
         <span>{{client.first_name}}</span>
         <span>{{client.last_name}}</span>
       </p>
     </div>
-    <button >Say Greeting</button>
+    <button v-on:click="greet()">Say Greeting</button>
   </div>
 </template>
 
@@ -17,12 +17,17 @@ import clientService from '@/services/client/client.service'
 
     data(){
       return{
-        users: []
+        clients: []
       }
     },
+    mounted(){
+      this.getClient()
+    },
     methods:{
+      greet(){
+        alert('HIIII');
+      },
       async getClient(){
-        debugger;
         const response = await clientService.getClient()
         this.clients = response.data
       }
